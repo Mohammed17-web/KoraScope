@@ -13,3 +13,27 @@ document.addEventListener("click",e=>{const tab=e.target.closest("[data-tab]");i
 $("#notifyBtn").addEventListener("click",()=>toast("سنضيف تنبيهات المباريات في تحديث لاحق"));
 render();
 if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+// دالة لجلب المباريات الحية باستخدام مفتاح الـ API الخاص بك
+async function fetchLiveMatches() {
+  try {
+    const response = await fetch('https://api.football-data.org/v4/matches', {
+      headers: {
+        'X-Auth-Token': 'ضع_مفتاح_الـ_API_هنا' // الصق مفتاحك هنا بين علامتي التنصيص
+     8eac746134d14abd9ad2fb3aeb996a65 }
+    });
+    
+    const data = await response.json();
+    console.log("المباريات المسترجعة بنجاح:", data.matches);
+    
+    // يمكنك لاحقاً تمرير data.matches لدالة العرض لتظهر في التطبيق
+    if (data.matches) {
+      // مثال: لعرض المباريات في وحدة التتبع أو الواجهة
+      renderApiMatches(data.matches);
+    }
+  } catch (error) {
+    console.error('حدث خطأ أثناء جلب المباريات:', error);
+  }
+}
+
+// استدعاء الدالة لتعمل فور فتح التطبيق
+fetchLiveMatches();
