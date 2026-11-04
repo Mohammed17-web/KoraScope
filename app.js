@@ -1,8 +1,4 @@
-const sampleMatches = [
- {id:"m1",league:"دوري أبطال أوروبا",time:"20:00",home:"ريال مدريد",away:"مانشستر سيتي",h:"⚪",a:"🔵",score:"— : —",state:"موعد توضيحي"},
- {id:"m2",league:"الدوري الإسباني",time:"22:00",home:"برشلونة",away:"أتلتيكو مدريد",h:"🔴🔵",a:"🔴⚪",score:"— : —",state:"موعد توضيحي"},
- {id:"m3",league:"الدوري الإنجليزي",time:"18:30",home:"ليفربول",away:"أرسنال",h:"🔴",a:"🔴",score:"— : —",state:"موعد توضيحي"}
-];
+
 const favs = new Set(JSON.parse(localStorage.getItem("korascope-favs")||"[]"));
 const $ = s => document.querySelector(s);
 function card(m){return `<article class="match-card"><div class="match-meta"><span>${m.league}</span><span>${m.state}</span></div><div class="teams"><div class="team"><span class="crest">${m.h}</span>${m.home}</div><div class="score">${m.score}<small>${m.time}</small></div><div class="team"><span class="crest">${m.a}</span>${m.away}</div></div><div class="card-foot"><span>بيانات تجريبية وليست جدولاً مؤكداً</span><button class="fav" data-fav="${m.id}" aria-label="إضافة للمفضلة">${favs.has(m.id)?"★":"☆"}</button></div></article>`}
